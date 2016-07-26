@@ -19,7 +19,7 @@ RUN sudo adduser git \
   && mkdir .ssh \
   && cat /git-server/cert/*.pub > .ssh/authorized_keys
 
-EXPOSE 22822
+EXPOSE 22
 
 # Bandera -D para que no se ejecute como demonio
-CMD ["/usr/sbin/sshd", "-D", "-p", "22822"]
+CMD ["/usr/sbin/sshd", "-D"]
