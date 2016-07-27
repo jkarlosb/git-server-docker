@@ -19,6 +19,8 @@ WORKDIR /git-server/
 # Con -D no creamos password, con -s le cambiamos la shell
 RUN mkdir /git-server/keys \
   && adduser -D -s /usr/bin/git-shell git \
+  #&& adduser -D git \
+  && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
 
 COPY sshd_config /etc/ssh/sshd_config

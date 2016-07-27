@@ -16,15 +16,15 @@
 #ListenAddress ::
 
 # The default requires explicit activation of protocol 1
-Protocol 2
+#Protocol 2
 
 # HostKey for protocol version 1
 #HostKey /etc/ssh/ssh_host_key
 # HostKeys for protocol version 2
-HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_dsa_key
-HostKey /etc/ssh/ssh_host_ecdsa_key
-HostKey /etc/ssh/ssh_host_ed25519_key
+#HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_dsa_key
+#HostKey /etc/ssh/ssh_host_ecdsa_key
+#HostKey /etc/ssh/ssh_host_ed25519_key
 
 # Lifetime and size of ephemeral version 1 server key
 #KeyRegenerationInterval 1h
@@ -46,12 +46,13 @@ HostKey /etc/ssh/ssh_host_ed25519_key
 #MaxAuthTries 6
 #MaxSessions 10
 
-#RSAAuthentication yes
+RSAAuthentication yes
 PubkeyAuthentication yes
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
 AuthorizedKeysFile	.ssh/authorized_keys
+#AuthorizedKeysFile	/home/git/.ssh/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
@@ -76,13 +77,13 @@ PasswordAuthentication no
 #ChallengeResponseAuthentication yes
 
 # Kerberos options
-#KerberosAuthentication no
+KerberosAuthentication no
 #KerberosOrLocalPasswd yes
 #KerberosTicketCleanup yes
 #KerberosGetAFSToken no
 
 # GSSAPI options
-#GSSAPIAuthentication no
+GSSAPIAuthentication no
 #GSSAPICleanupCredentials yes
 
 # Set this to 'yes' to enable PAM authentication, account processing,
@@ -128,7 +129,7 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 # the following are HPN related configuration options
 # tcp receive buffer polling. disable in non autotuning kernels
 #TcpRcvBufPoll yes
- 
+
 # disable hpn performance boosts
 #HPNDisabled no
 
