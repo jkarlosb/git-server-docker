@@ -5,8 +5,8 @@ MAINTAINER José Carlos Bernárdez "jkarlosb@gmail.com"
 # --no-cache es nuevo en Alpine 3.3 y evita tener que utilizar
 # --update + rm -rf /var/cache/apk/* (borrar el caché)
 RUN apk add --no-cache \
-  openssh \
-  git
+  openssh=7.2_p2-r1 \
+  git=2.8.3-r0
 
 # Generamos las claves del servidor
 RUN ssh-keygen -A
@@ -19,7 +19,6 @@ WORKDIR /git-server/
 # Con -D no creamos password, con -s le cambiamos la shell
 RUN mkdir /git-server/keys \
   && adduser -D -s /usr/bin/git-shell git \
-  #&& adduser -D git \
   && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
 
