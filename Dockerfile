@@ -14,16 +14,16 @@ RUN ssh-keygen -A
 # Para que ssh se auto-arranque
 # RUN rc-update add sshd
 
-# COn -D no creamos password, con -s le cambiamos la shell
-RUN adduser -D git \
-  && su git \
-  && mkdir .ssh \
-  && deluser git \
+WORKDIR /git-server/
+
+# Con -D no creamos password, con -s le cambiamos la shell
+RUN mkdir /git-server/keys \
   && adduser -D -s /usr/bin/git-shell git \
-  && exit \
-  && cat /cert/*.pub > .ssh/authorized_keys
+  && mkdir /home/git/.ssh
+
+COPY sshd_config /etc/ssh/sshd_config
+COPY start.sh start.sh
 
 EXPOSE 22
 
-# Bandera -D para que no se ejecute como demonio
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["sh", "start.sh"]
