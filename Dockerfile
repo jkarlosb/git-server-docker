@@ -22,6 +22,13 @@ RUN mkdir /git-server/keys \
   && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
 
+# This is a login shell for SSH accounts to provide restricted Git access.
+# It permits execution only of server-side Git commands implementing the
+# pull/push functionality, plus custom commands present in a subdirectory
+# named git-shell-commands in the user’s home directory.
+# More info: https://git-scm.com/docs/git-shell
+COPY git-shell-commands /home/git/git-shell-commands
+
 # En sshd_config habilitamos acceso por key y deshabilitamos por password
 COPY sshd_config /etc/ssh/sshd_config
 COPY start.sh start.sh

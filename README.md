@@ -9,7 +9,12 @@ How to run the container in port 2222 with two volumes, keys volume for public k
 
 How check that container works (you must to have a key):
 
-	$ ssh git@<ip-docker-server> -p 2222 -v
+	$ ssh git@<ip-docker-server> -p 2222
+	...
+	Welcome to jkarlos/git-server-docker!
+	You've successfully authenticated, but I do not
+	provide interactive shell access.
+	...
 
 How clone a repository:
 
