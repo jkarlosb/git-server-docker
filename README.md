@@ -1,5 +1,5 @@
 # git-server-docker
-A lightweight Git Server Docker image built with Alpine Linux. Available on [GitHub](https://github.com/jkarlosb/git-server-docker).
+A lightweight Git Server Docker image built with Alpine Linux. Available on [GitHub](https://github.com/jkarlosb/git-server-docker) and [Docker Hub](https://hub.docker.com/r/jkarlos/git-server-docker/)
 
 ### Basic Usage
 
@@ -7,7 +7,7 @@ How to make the image:
 
 	$ docker build -t git-server-docker .
 
-How to run the container in port 2222 with two volumes, keys volumen for public keys and repos volume for git repositories:
+How to run the container in port 2222 with two volumes, keys volume for public keys and repos volume for git repositories:
 
 	$ docker run -d -p 2222:22 -v /home/jkarlos/git-server/keys:/git-server/keys -v /home/jkarlos/git-server/repos:/git-server/repos jkarlos/git-server-docker
 

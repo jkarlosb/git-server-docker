@@ -22,6 +22,7 @@ RUN mkdir /git-server/keys \
   && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
 
+# En sshd_config habilitamos acceso por key y deshabilitamos por password
 COPY sshd_config /etc/ssh/sshd_config
 COPY start.sh start.sh
 
