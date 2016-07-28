@@ -17,10 +17,10 @@ How clone a repository:
 
 ### Arguments
 
-	* **Expose ports**: 22
-	* **Volumes**:
-	 * */git-server/keys*: Volume to store the users public keys
-	 * */git-server/repos*: Volume to store the repositories
+* **Expose ports**: 22
+* **Volumes**:
+ * */git-server/keys*: Volume to store the users public keys
+ * */git-server/repos*: Volume to store the repositories
 
 ### SSH Keys
 
