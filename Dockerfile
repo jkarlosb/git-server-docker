@@ -5,8 +5,10 @@ MAINTAINER José Carlos Bernárdez "jkarlosb@gmail.com"
 # --no-cache es nuevo en Alpine 3.3 y evita tener que utilizar
 # --update + rm -rf /var/cache/apk/* (borrar el caché)
 RUN apk add --no-cache \
-  openssh=7.2_p2-r1 \
-  git=2.8.3-r0
+# openssh=7.2_p2-r1 \
+  openssh \
+# git=2.8.3-r0
+  git
 
 # Generamos las claves del servidor
 RUN ssh-keygen -A
