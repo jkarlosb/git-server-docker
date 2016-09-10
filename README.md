@@ -42,3 +42,9 @@ How upload quickly a public key to host volume:
 How to make the image:
 
 	$ docker build -t git-server-docker .
+	
+### Docker-Compose
+
+You can edit docker-compose.yml and run this container with docker-compose:
+
+	$ docker-compose up -d
