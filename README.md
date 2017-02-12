@@ -5,9 +5,16 @@ A lightweight Git Server Docker image built with Alpine Linux. Available on [Git
 
 How to run the container in port 2222 with two volumes, keys volume for public keys and repos volume for git repositories:
 
-	$ docker run -d -p 2222:22 -v /home/jkarlos/git-server/keys:/git-server/keys -v /home/jkarlos/git-server/repos:/git-server/repos jkarlos/git-server-docker
+	$ docker run -d -p 2222:22 -v ~/git-server/keys:/git-server/keys -v ~/git-server/repos:/git-server/repos jkarlos/git-server-docker
 
-How check that container works (you must to have a key):
+How to use a public key:
+
+	From host:
+	$ cp ~/.ssh/id_rsa.pub ~/git-server/keys
+	From remote:
+	$ scp ~/.ssh/id_rsa.pub user@host:~/git-server/keys
+	
+How to check that container works (you must to have a key):
 
 	$ ssh git@<ip-docker-server> -p 2222
 	...
@@ -15,6 +22,14 @@ How check that container works (you must to have a key):
 	You've successfully authenticated, but I do not
 	provide interactive shell access.
 	...
+
+How to upload a repo:
+
+    From host:
+    $ mv myrepo.git ~/git-server/repos
+    From remote:
+    $ scp myrepo.git user@host:~/git-server/keys
+
 
 How clone a repository:
 
@@ -35,7 +50,7 @@ How generate a pair keys in client machine:
 
 How upload quickly a public key to host volume:
 
-	$ scp ~/.ssh/id_rsa.pub user@host:/home/jkarlos/git-server/keys
+	$ scp ~/.ssh/id_rsa.pub user@host:~/git-server/keys
 
 ### Build Image
 

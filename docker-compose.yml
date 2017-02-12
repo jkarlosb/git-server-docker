@@ -10,6 +10,6 @@ services:
     ports:
       - "2222:22"
     volumes:
-    - /home/jkarlos/git-server/keys:/git-server/keys
-    - /home/jkarlos/git-server/repos:/git-server/repos
+    - ~/git-server/keys:/git-server/keys
+    - ~/git-server/repos:/git-server/repos
 
