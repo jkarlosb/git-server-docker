@@ -25,13 +25,21 @@ How to check that container works (you must to have a key):
 	provide interactive shell access.
 	...
 
+How to create a new repo:
+
+	$ cd myrepo
+	$ git init --shared=true
+	$ git add .
+	$ git commit -m "my first commit"
+	$ cd ..
+	$ git clone --bare myrepo myrepo.git
+
 How to upload a repo:
 
-    From host:
-    $ mv myrepo.git ~/git-server/repos
-    From remote:
-    $ scp myrepo.git user@host:~/git-server/keys
-
+	From host:
+	$ mv myrepo.git ~/git-server/repos
+	From remote:
+	$ scp myrepo.git user@host:~/git-server/repos
 
 How clone a repository:
 
