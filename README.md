@@ -39,7 +39,7 @@ How to upload a repo:
 	From host:
 	$ mv myrepo.git ~/git-server/repos
 	From remote:
-	$ scp myrepo.git user@host:~/git-server/repos
+	$ scp -r myrepo.git user@host:~/git-server/repos
 
 How clone a repository:
 
