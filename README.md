@@ -11,16 +11,17 @@ How to run the container in port 2222 with two volumes, keys volume for public k
 
 How to use a public key:
 
-	From host:
-	$ cp ~/.ssh/id_rsa.pub ~/git-server/keys
-	From remote:
-	$ scp ~/.ssh/id_rsa.pub user@host:~/git-server/keys
+    Copy them to keys folder: 
+	- From host: $ cp ~/.ssh/id_rsa.pub ~/git-server/keys
+	- From remote: $ scp ~/.ssh/id_rsa.pub user@host:~/git-server/keys
+	You need restart the container when keys are updated:
+	$ docker restart <container-id>
 	
 How to check that container works (you must to have a key):
 
 	$ ssh git@<ip-docker-server> -p 2222
 	...
-	Welcome to jkarlos/git-server-docker!
+	Welcome to git-server-docker!
 	You've successfully authenticated, but I do not
 	provide interactive shell access.
 	...
