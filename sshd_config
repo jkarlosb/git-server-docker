@@ -76,14 +76,14 @@ PasswordAuthentication no
 # Change to no to disable s/key passwords
 #ChallengeResponseAuthentication yes
 
-# Kerberos options
-KerberosAuthentication no
+# Kerberos options (deprecated)
+#KerberosAuthentication no
 #KerberosOrLocalPasswd yes
 #KerberosTicketCleanup yes
 #KerberosGetAFSToken no
 
-# GSSAPI options
-GSSAPIAuthentication no
+# GSSAPI options (deprecated)
+#GSSAPIAuthentication no
 #GSSAPICleanupCredentials yes
 
 # Set this to 'yes' to enable PAM authentication, account processing,
