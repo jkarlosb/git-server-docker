@@ -26,7 +26,7 @@ if [ "$(ls -A /git-server/repos/)" ]; then
   find . -type d -exec chmod g+s '{}' +
 fi
 
-/usr/sbin/sshd
+/usr/sbin/sshd -D &
 
 child=$!
 wait "$child"
