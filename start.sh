@@ -1,5 +1,12 @@
 #!/bin/sh
 
+_term() {
+  echo "Caught SIGTERM signal!"
+  kill -TERM "$child" 2>/dev/null
+}
+
+trap _term SIGTERM
+
 # If there is some public key in keys folder
 # then it copies its contain in authorized_keys file
 if [ "$(ls -A /git-server/keys/)" ]; then
@@ -19,5 +26,7 @@ if [ "$(ls -A /git-server/repos/)" ]; then
   find . -type d -exec chmod g+s '{}' +
 fi
 
-# -D flag avoids executing sshd as a daemon
-/usr/sbin/sshd -D
+/usr/sbin/sshd
+
+child=$!
+wait "$child"
