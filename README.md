@@ -56,6 +56,7 @@ How to list all repositories:
 * **Volumes**:
  * */git-server/keys*: Volume to store the users public keys
  * */git-server/repos*: Volume to store the repositories
+ * */git-server/keys-host*: Volume to store the SSHd host keys
 
 ### SSH Keys
 
