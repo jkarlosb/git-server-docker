@@ -46,6 +46,10 @@ How clone a repository:
 
 	$ git clone ssh://git@<ip-docker-server>:2222/git-server/repos/myrepo.git
 
+How to list all repositories:
+
+	$ ssh git@<ip-docker-server>:2222
+
 ### Arguments
 
 * **Expose ports**: 22
