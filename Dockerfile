@@ -25,6 +25,8 @@ RUN     mkdir keys && \
 # More info: https://git-scm.com/docs/git-shell
 COPY    git-shell-commands /home/git/git-shell-commands
 
+RUN     echo '' > /etc/motd
+
 # sshd_config file is edited for enable access key and disable access password
 COPY    sshd_config /etc/ssh/sshd_config
 
