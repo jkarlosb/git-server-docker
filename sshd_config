@@ -20,11 +20,11 @@
 
 # HostKey for protocol version 1
 #HostKey /etc/ssh/ssh_host_key
-# HostKeys for protocol version 2
-#HostKey /etc/ssh/ssh_host_rsa_key
-#HostKey /etc/ssh/ssh_host_dsa_key
-#HostKey /etc/ssh/ssh_host_ecdsa_key
-#HostKey /etc/ssh/ssh_host_ed25519_key
+#HostKeys for protocol version 2
+HostKey /git-server/keys-host/ssh_host_rsa_key
+HostKey /git-server/keys-host/ssh_host_dsa_key
+HostKey /git-server/keys-host/ssh_host_ecdsa_key
+HostKey /git-server/keys-host/ssh_host_ed25519_key
 
 # Lifetime and size of ephemeral version 1 server key
 #KeyRegenerationInterval 1h

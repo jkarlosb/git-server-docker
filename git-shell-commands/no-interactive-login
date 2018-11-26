@@ -2,4 +2,16 @@
 printf '%s\n' "Welcome to git-server-docker!"
 printf '%s\n' "You've successfully authenticated, but I do not"
 printf '%s\n' "provide interactive shell access."
+
+printf '\n'
+printf '%s\n' "The following repositories are available:"
+for REPO in /git-server/repos/*
+do
+  printf '%s\n' " - $(basename ${REPO%.git})"
+done
+
+printf '\n'
+printf '%s\n' "To clone, use the following URL:"
+printf '%s\n' "ssh://git@<SERVER>:<PORT>/git-server/repos/<REPO_NAME>.git"
+
 exit 128

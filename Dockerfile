@@ -1,41 +1,39 @@
-FROM alpine:3.4
+FROM    alpine:3.8
 
-MAINTAINER Carlos Bernárdez "carlos@z4studios.com"
+LABEL   maintainer='Carlos Bernárdez <carlos@z4studios.com>'
 
-# "--no-cache" is new in Alpine 3.3 and it avoid using
-# "--update + rm -rf /var/cache/apk/*" (to remove cache)
-RUN apk add --no-cache \
-# openssh=7.2_p2-r1 \
-  openssh \
-# git=2.8.3-r0
-  git
-
-# Key generation on the server
-RUN ssh-keygen -A
-
-# SSH autorun
-# RUN rc-update add sshd
+RUN     apk add --no-cache openssh git
 
 WORKDIR /git-server/
 
+RUN     mkdir -p keys-host/etc/ssh && \
+        ssh-keygen -A -f keys-host  && \
+        mv keys-host/etc/ssh/* keys-host && \
+        rm -rf keys-host/etc
+
 # -D flag avoids password generation
 # -s flag changes user's shell
-RUN mkdir /git-server/keys \
-  && adduser -D -s /usr/bin/git-shell git \
-  && echo git:12345 | chpasswd \
-  && mkdir /home/git/.ssh
+RUN     mkdir keys && \
+        adduser -D -s /usr/bin/git-shell git && \
+        echo git:12345 | chpasswd && \
+        mkdir /home/git/.ssh
 
 # This is a login shell for SSH accounts to provide restricted Git access.
 # It permits execution only of server-side Git commands implementing the
 # pull/push functionality, plus custom commands present in a subdirectory
 # named git-shell-commands in the user’s home directory.
 # More info: https://git-scm.com/docs/git-shell
-COPY git-shell-commands /home/git/git-shell-commands
+COPY    git-shell-commands /home/git/git-shell-commands
+
+RUN     echo '' > /etc/motd
 
 # sshd_config file is edited for enable access key and disable access password
-COPY sshd_config /etc/ssh/sshd_config
-COPY start.sh start.sh
+COPY    sshd_config /etc/ssh/sshd_config
 
-EXPOSE 22
+COPY    start.sh start.sh
 
-CMD ["sh", "start.sh"]
+EXPOSE  22
+
+VOLUME  ["/git/server/keys", "/git-server/keys-host", "/git-server/repos"]
+
+CMD     ["sh", "start.sh"]
