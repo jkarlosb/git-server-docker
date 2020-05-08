@@ -1,0 +1,15 @@
+sudo: required
+env:
+  global:
+    secure: UI+fPqbGYOhFBnhwOlAfc3qX5SL9/ve5f+FzyxfV3TA3e0lfzn8mNYBxYH8WEyjnzbX2fjC1S1dYz4iiaUxPqqfkfqH3PdVoh0CDklG8GINFY35gIGZdqkpW+NZ3SXD20EdndxeVbDgeZP+QOyn4QZES4zAouO4QsX3qJ7Y86ZnRXBsqG7+sP9b7ocM1IGRxivJNnQcQbKQ5a6jQhHj9EHJkQp5KRh1DVMUsrFQBJSIzLWIG5ZiHSBpjvxzg/u08CVu/+DH8u4BfNtiaABguZ/5UeGiQJhJVR2TzqNfnihoCVuMZXI4818e/W8pDOrJD0kCTpizMvxeo52XAZeGAr+XsfP0ZmIVjHYgnrPQA15YRbxyR88Lz91f6V3UzRKkcXYlNVqd765uoZyamxNnnb/zGKFtZl/UXVtpfg72QLVM8VecdGtPWEADH7TkFqMU3xrr7hGJog4ZGh1n1S+YMpGgbXpyqDWsN4T8as/cTjQ1pNgIibu2++n12SrUV/eT5Ehhdhl3/fdgqmgLaygA4bhxZzHEii6ZFvAA/Eg6ACqs3F0tNbhtpPd0MPdXyvt3V5VQHV3XLSZLmobFUQnw3RqPzbX0UtmPwfQf21ViBPpymfXkwl6y5M3vs7mUHVCh28XHeQ9D0lygHOm02TO8ZnAzGH+b+5L/eBL55D2UWFF4=
+services:
+- docker
+addons:
+  apt:
+    update: true
+script:
+- make build
+after_success:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then make
+  release; fi

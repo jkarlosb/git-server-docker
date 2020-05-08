@@ -35,8 +35,8 @@
 
 # Logging
 # obsoletes QuietMode and FascistLogging
-#SyslogFacility AUTH
-#LogLevel INFO
+SyslogFacility AUTH
+LogLevel DEBUG
 
 # Authentication:
 
@@ -50,9 +50,8 @@ RSAAuthentication yes
 PubkeyAuthentication yes
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
-# but this is overridden so installations will only check .ssh/authorized_keys
-AuthorizedKeysFile	.ssh/authorized_keys
-#AuthorizedKeysFile	/home/git/.ssh/authorized_keys
+# but this is overridden so installations will only check /home/git/.ssh/authorized_keys
+AuthorizedKeysFile	/home/git/.ssh/authorized_keys
 
 #AuthorizedPrincipalsFile none
 

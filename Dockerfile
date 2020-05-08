@@ -1,22 +1,16 @@
-FROM alpine:3.4
+FROM alpine:latest
 
-MAINTAINER Carlos Bernárdez "carlos@z4studios.com"
+LABEL Maintainer="Frank Ittermann frank.ittermann@yahoo.de"
 
-# "--no-cache" is new in Alpine 3.3 and it avoid using
-# "--update + rm -rf /var/cache/apk/*" (to remove cache)
-RUN apk add --no-cache \
-# openssh=7.2_p2-r1 \
+RUN apk update && \
+  apk add --no-cache \
   openssh \
-# git=2.8.3-r0
   git
 
-# Key generation on the server
+# generate host keys
 RUN ssh-keygen -A
 
-# SSH autorun
-# RUN rc-update add sshd
-
-WORKDIR /git-server/
+WORKDIR /git-server
 
 # -D flag avoids password generation
 # -s flag changes user's shell
@@ -34,8 +28,11 @@ COPY git-shell-commands /home/git/git-shell-commands
 
 # sshd_config file is edited for enable access key and disable access password
 COPY sshd_config /etc/ssh/sshd_config
-COPY start.sh start.sh
+COPY start.sh /start.sh
+COPY motd /etc
+
+ENV ACCOUNT helmet
 
 EXPOSE 22
 
-CMD ["sh", "start.sh"]
+CMD ["sh", "/start.sh"]
