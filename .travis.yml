@@ -1,15 +1,23 @@
+os: linux
+arch: arm64-graviton2
+
 sudo: required
-env:
-  global:
-    secure: UI+fPqbGYOhFBnhwOlAfc3qX5SL9/ve5f+FzyxfV3TA3e0lfzn8mNYBxYH8WEyjnzbX2fjC1S1dYz4iiaUxPqqfkfqH3PdVoh0CDklG8GINFY35gIGZdqkpW+NZ3SXD20EdndxeVbDgeZP+QOyn4QZES4zAouO4QsX3qJ7Y86ZnRXBsqG7+sP9b7ocM1IGRxivJNnQcQbKQ5a6jQhHj9EHJkQp5KRh1DVMUsrFQBJSIzLWIG5ZiHSBpjvxzg/u08CVu/+DH8u4BfNtiaABguZ/5UeGiQJhJVR2TzqNfnihoCVuMZXI4818e/W8pDOrJD0kCTpizMvxeo52XAZeGAr+XsfP0ZmIVjHYgnrPQA15YRbxyR88Lz91f6V3UzRKkcXYlNVqd765uoZyamxNnnb/zGKFtZl/UXVtpfg72QLVM8VecdGtPWEADH7TkFqMU3xrr7hGJog4ZGh1n1S+YMpGgbXpyqDWsN4T8as/cTjQ1pNgIibu2++n12SrUV/eT5Ehhdhl3/fdgqmgLaygA4bhxZzHEii6ZFvAA/Eg6ACqs3F0tNbhtpPd0MPdXyvt3V5VQHV3XLSZLmobFUQnw3RqPzbX0UtmPwfQf21ViBPpymfXkwl6y5M3vs7mUHVCh28XHeQ9D0lygHOm02TO8ZnAzGH+b+5L/eBL55D2UWFF4=
 services:
-- docker
+  - docker
 addons:
   apt:
     update: true
+
+env:
+  global:
+    - secure: Md/6iQ+iNJ//lyQyPIl43dU5oiaDV4NgJqiVDmW3hnLME0OLfHp5D7eba29T5TldUsE/wrJCuhFXoCqwUhgTdLWpiNUq7RVuZOMhd5Mpk4Q1Uqq45oo+l5XMJc1+Q2AIa6PI05T05UuknbMNzM9W4HX4o5r9pGUCtsfvX3Wy0YIfZ1zqApb9T/NiG4ponuUwIO+WpYQjztvMWCnbyRB7XcTYfms5gHm6D69iOP1ZS7DTH5xaTufnGLlqvhsTzDuHIt/Bt5vlKHq07DR0dkrmQGIul5yuMgYPD46+ckcuYc9cXFUCNCB6L8MJo2f0Do+nT+gKWzBY9dDRPqDDX4z4nNeoj15ZjwtigmX1MBzYc44CGfXLQQ0bDFzHyZdlm5ksf37yf78xV4eci8/Sy8OkmFQpa5Jd6cz4YJU1tB26JLgsgaE22Cv7vKFMUYNHLl0zWaI7X9i3qRrdFDwZ2VIi3qwOKE9mnNXS8NKyluUM9ZiAAW/nog2KcSoPlbmQSApdfkfg6CXY2cZEFiHThPAt41HAHc8m9axO+BVfkLTtlC5HQWBP7cy2Is9LkMfDDnAGQrP9VyqTAgV4AVq74zXX/j/tkfSiVvr/2YhpxUE9tBDB4Sahy6GsGTUw/TT4VROpk1wsc5PY/P91UKcvLNxog5QEQyAWt9lF6eoH9uGj2JA=
+    - secure: ZMmuA1ZZwO0NgG3Ev2JWw+/rQMeGYhY+ZuTyFxYHleT6YK07dGN1vnoFF2tfcrjg44xSNepNOXDYXRIC7b07iSw3NxISeaIiV9zfFLSFtMrMy0rLu1QOmjjr2ScLHoL7qN2xNvg4UEZ5Y+nELnJ+OyCJhmDyNLOEigdVKqTd2ruURae5zwPtRm66kEN11zLd+SsGQ6W7JJmx8hCEdFPmLA9RW0BHGlAackoISwKbnax3RTYwIhA296A8t0dug/N6OOCqx6DWhkbUhOv1p3Zoz1Dn2XeiRbGAeFrMguiHETYFHh835vqOHtZd2NI4ItxSLDB8wFDItKbttlVRKwbuyjPvYAOTCbNYlTA9eGRJPHnTBEcf/UesUnN0ILz7VolO7Tf+8eRd01P2wytlAR4bag01+3V8WchluWNZQpcZuSacFUiw2ATfMVV2VicquosjUw4tSruapQE49RNuzfzWBvSG1Vy2qRkT3CXL3HT9AY8N+qMlsTOK41yy23dGmCsj9QW+5Wjm/5b9gW9iNLF/UzVTPA6zxCYhRTdnSY4/6BnQJAv4hfKPPvAaC8E43IVps7kbrsNEBg9qSb6+qNEAL5bPcCfWlvO+UtTfPtvJZ8kyQQTMrSgZCrvd7o2BoQpU3Q4M2q48uWPiI0FPvkawMA0G2qJRkYxd4T1kQ8U4VXk=
+
 script:
-- make build
+  - make build
+
 after_success:
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then make
-  release; fi
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"
+    --password-stdin
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then
+    make release; fi
