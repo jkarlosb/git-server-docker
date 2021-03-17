@@ -1,6 +1,7 @@
 
 VERSION=1.0.0
 ACCOUNT?=fr123k
+DEBUG?=false
 REPOSITORIES?=$(PWD)/../
 export NAME=fr123k/git-server-docker
 export IMAGE="${NAME}:${VERSION}"
@@ -14,4 +15,4 @@ release: build ## Push docker image to docker hub
 	docker push ${NAME}
 
 git-server:
-	docker run -p 22:22 -it -v $(REPOSITORIES):/git-server -e ACCOUNT=$(ACCOUNT) --name github --rm ${IMAGE}
+	docker run -p 22:22 -it -v $(REPOSITORIES):/git-server -e DEBUG=$(DEBUG) -e ACCOUNT=$(ACCOUNT) --name github --rm ${IMAGE}
