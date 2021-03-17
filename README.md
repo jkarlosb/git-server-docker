@@ -119,7 +119,7 @@ git clone ssh://git@127.0.0.1:22/helmet/local-git-repo.git
 ### Validate Local SSH Git Server
 
 How to check that container and the authentication keys works.
-`ssh git@127.0.0.1 -p 2222`
+`ssh git@127.0.0.1 -p 22`
 The expected output looks like this.
 ```
 Welcome to git-server-docker!
@@ -175,3 +175,7 @@ or
 ```bash
 docker run -p 22:22 -it -v $(PWD)/../ :/git-server -e ACCOUNT=fr123k --name github --rm "fr123k/git-server-docker"
 ```
+
+# Todo
+
+* support multiple accounts

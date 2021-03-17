@@ -12,6 +12,20 @@ if [ "$(ls -A /git-server/.keys/)" ]; then
   chmod -R 600 /home/git/.ssh/*
 fi
 
+# add ${ACCOUNT} user to support git clone for https://github.com/account as well.
+adduser -D --home /home/${ACCOUNT} --shell /bin/sh ${ACCOUNT}
+PASSWORD=$(date | md5sum | cut -d " " -f 0)
+echo "${ACCOUNT}:${PASSWORD}" | chpasswd
+addgroup ${ACCOUNT} git
+
+if [ "$(ls -A /git-server/.keys/)" ]; then
+  mkdir /home/${ACCOUNT}/.ssh
+  cat /git-server/.keys/*.pub > /home/${ACCOUNT}/.ssh/authorized_keys
+  chown -R ${ACCOUNT}:git /home/${ACCOUNT}/.ssh
+  chmod 700 /home/${ACCOUNT}/.ssh
+  chmod -R 600 /home/${ACCOUNT}/.ssh/*
+fi
+
 mkdir /${ACCOUNT}
 
 cd /${ACCOUNT}
