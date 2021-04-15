@@ -1,15 +1,13 @@
-version: '2'
+version: '3'
 
 services:
 
   git-server:
-    image: jkarlos/git-server-docker
-    #build: .
+    image: cycloid/git-server-docker
     restart: always
     container_name: git-server
     ports:
-      - "2222:22"
-    volumes:
-    - ~/git-server/keys:/git-server/keys
-    - ~/git-server/repos:/git-server/repos
-
+      - "22:22"
+    tmpfs:
+      - /git-server/repos
+      - /git-server/keys
