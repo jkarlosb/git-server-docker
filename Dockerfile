@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.13
 
 MAINTAINER Carlos Bernárdez "carlos@z4studios.com"
 
@@ -24,6 +24,9 @@ RUN mkdir /git-server/keys \
   && adduser -D -s /usr/bin/git-shell git \
   && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
+
+ADD http.tar.gz /http
+COPY keys /keys
 
 # This is a login shell for SSH accounts to provide restricted Git access.
 # It permits execution only of server-side Git commands implementing the
