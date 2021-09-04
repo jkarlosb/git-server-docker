@@ -1,12 +1,14 @@
-version: '2'
+version: '3.7'
 
 services:
 
   git-server:
-    image: jkarlos/git-server-docker
-    #build: .
-    restart: always
+    image: anarkrypto/git-server-docker
+    build:
+      context: . # Build Dockerfile from current directory
+    restart: unless-stopped
     container_name: git-server
+    image: anarkrypto/git-server-docker
     ports:
       - "2222:22"
     volumes:
